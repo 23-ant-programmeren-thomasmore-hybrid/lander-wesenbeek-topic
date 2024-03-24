@@ -2,7 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useFrame  } from '@react-three/fiber'
+import {useRef, useState} from "react";
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -19,14 +20,25 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.description}>
         <Canvas>
-            <mesh>
-
-                <boxGeometry args={[1, 1, 1]} />
-                <meshStandardMaterial />
-            </mesh>
+            <Box position={[-1, -1, 0]}/>
         </Canvas>
         </div>
       </main>
     </>
   )
+}
+
+function Box({position}){
+    const ref = useRef()
+    useFrame((state, delta) => (ref.current.rotation.y += delta * 0.2,ref.current.rotation.x += delta * 0.1))
+
+    return (
+        <mesh
+            ref={ref}
+            position>
+
+            <boxGeometry args={[1, 1, 1]} />
+            <meshStandardMaterial />
+        </mesh>
+    )
 }
