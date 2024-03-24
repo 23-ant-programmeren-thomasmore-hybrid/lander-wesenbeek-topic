@@ -17,10 +17,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <div className={styles.description}>
-        <Canvas>
-            <Box position={[-1, -1, 0]}/>
+      <main Style={"width:1900px; height:738px"}>
+        <div Style={"width:100%; height:100%"} >
+        <Canvas Style={"width:100%; height:100%"} >
+            <Box point={[-3, -2, 0]}/>
+            <Box point={[-3, -2, 2]}/>
+            <Box point={[1, 0, -1]}/>
+            <Box point={[-4, 1.5, 1]}/>
         </Canvas>
         </div>
       </main>
@@ -28,14 +31,14 @@ export default function Home() {
   )
 }
 
-function Box({position}){
+function Box({point}){
     const ref = useRef()
     useFrame((state, delta) => (ref.current.rotation.y += delta * 0.2,ref.current.rotation.x += delta * 0.1))
 
     return (
         <mesh
             ref={ref}
-            position>
+            position={point}>
 
             <boxGeometry args={[1, 1, 1]} />
             <meshStandardMaterial />
