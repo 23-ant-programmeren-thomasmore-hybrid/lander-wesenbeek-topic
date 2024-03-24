@@ -34,14 +34,19 @@ export default function Home() {
 function Box({point}){
     const ref = useRef()
     useFrame((state, delta) => (ref.current.rotation.y += delta * 0.2,ref.current.rotation.x += delta * 0.1))
+    const [hovered, hover] = useState(false)
+    const [scale, setScale] = useState(1)
 
     return (
         <mesh
             ref={ref}
-            position={point}>
+            position={point}
+            scale={scale}
+            onPointerOver={(event) => (setScale(scale+0.2) , hover(true))}
+            onPointerOut={(event) => hover(false)}>
 
             <boxGeometry args={[1, 1, 1]} />
-            <meshStandardMaterial />
+            <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'}/>
         </mesh>
     )
 }
