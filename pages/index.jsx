@@ -24,6 +24,8 @@ export default function Home() {
             <Box point={[-3, -2, 2]}/>
             <Box point={[1, 0, -1]}/>
             <Box point={[-4, 1.5, 1]}/>
+            <ambientLight intensity={0.05} />
+            <directionalLight color="#fff9db" position={[0, 1, 1]} />
         </Canvas>
         </div>
       </main>
